@@ -1,4 +1,4 @@
-'''def runge_kutta(func,derivfunc,a,b,n,y0,z0):
+def runge_kutta(func,derivfunc,a,b,n,y0,z0):
     h=(b-a)/n
     def df(x,y,z):
         df=eval(func)
@@ -378,7 +378,7 @@ for beta in range(0,j+1):
 for row in range(1,j+1,):
     for col in range(1,i+1):
         u[row,col]=((1-a*y)/(1+a*y))*u[row-1,col] - ((1-a*y)/(1+a*y))*u[row,col-1] +u[row-1,col-1]
-print(u)'''
+print(u)
 import numpy as np
 import math as m
 a=float(input("enter the value of a="))
