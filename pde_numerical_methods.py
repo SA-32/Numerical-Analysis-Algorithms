@@ -1,4 +1,9 @@
-'''def runge_kutta(func,derivfunc,a,b,n,y0,z0):
+# =====================================================================
+# 📘 RUNGE–KUTTA METHOD (Fourth-Order) for Solving ODEs
+# Used inside Shooting Method for boundary value problems
+# =====================================================================
+
+def runge_kutta(func,derivfunc,a,b,n,y0,z0):
     h=(b-a)/n
     def df(x,y,z):
         df=eval(func)
@@ -23,17 +28,23 @@
     return y1
 
 
-# python program for secant method
+# =====================================================================
+# 📘 SECANT METHOD
+# Used to iteratively refine guesses for the Shooting Method
+# =====================================================================
+
 def secant(y1,y2,f1,f2):
         yi=(y1*f2-y2*f1)/(f2-f1)
         return yi
 
     
-#python program to implement shooting method
 
-#value at x=1
+# =====================================================================
+# 📘 SHOOTING METHOD
+# Uses Runge–Kutta and Secant to solve Boundary Value Problems (BVP)
+# =====================================================================
+
 target=2
-
 #initial guesse of z at x=0
 tol=0.0001
 y1=0.5
@@ -56,6 +67,12 @@ while 1:
         f2 = f3
         # Calculate new y3 using secant method
         y3 = secant(y1, y2, f1 - target, f2 - target)
+
+
+# =====================================================================
+# 📘 GAUSS–SEIDEL ITERATIVE METHOD (for solving linear systems)
+# =====================================================================
+
 import numpy as np
 # Coefficient matrix
 a = np.array([[4,-1,0,-1,0,0,0,0,0],
@@ -88,8 +105,9 @@ for k in range(N):
                 sigma1+=a[i][j]*x[j]
             x[i] = (1/ a[i][i]) * (b[i] - sigma-sigma1)
      print("solution=",x)
-import numpy as np
 
+
+import numpy as np
 # Coefficient matrix
 a = np.array([[4, -1, 0, -1, 0, 0, 0, 0, 0],
               [-1, 4, -1, 0, -1, 0, 0, 0, 0],
@@ -122,6 +140,11 @@ for k in range(N):
             sigma1 += a[i][j] * x[j]
         x[i] = (1 / a[i][i]) * (b[i] - sigma - sigma1)
     print("Solution:", x)
+
+# =====================================================================
+# 📘 POISSON’S EQUATION (Finite Difference Method)
+# =====================================================================
+
 import numpy as np
 h=float(input("enter the value of h="))
 x_b=float(input("enter the boundary value of x="))
@@ -149,6 +172,10 @@ for it in range(50):
         print(it)
         break
 print(u)
+
+# =====================================================================
+# 📘 CRANK–NICOLSON METHOD (Implicit Finite Difference for Parabolic PDE)
+# =====================================================================
 
 import numpy as np
 import math as m
@@ -179,6 +206,8 @@ for it in range(50):
                 u_temp[row,col]=(1/(2*(1+y)))*(y*u[row,col-1] + y*u[row,col+1] + y*u[row+1,col-1] +y*u[row+1,col+1]+2*(1-y)*u[row+1,col])
             
 print(u)
+
+
 import numpy as np
 import math as m
 a=float(input("enter the value of a="))
@@ -211,6 +240,11 @@ for it in range(50):
                 u_temp[row,col]=(1/(2*(1+y)))*(y*u[row,col-1] + y*u[row,col+1] + y*u[row+1,col-1] +y*u[row+1,col+1]+2*(1-y)*u[row+1,col])
             
 print(u)
+
+# =====================================================================
+# 📘 HYPERBOLIC EQUATION (Wave Equation using Finite Difference Method)
+# =====================================================================
+
 import numpy as np
 import math as m
 a=float(input("enter the value of a="))
@@ -243,8 +277,6 @@ for row in range(j-2,-1,-1):
 print(u)
 
 
-
-
 import numpy as np
 h=float(input("enter the value of h="))
 x_b=float(input("enter the boundary value of x="))
@@ -273,6 +305,8 @@ for it in range(50):
         break
 
 print(u)
+
+
 import numpy as np
 import math as m
 a=float(input("enter the value of a="))
@@ -301,6 +335,8 @@ for row in range(j-1,-1,-1):
     for col in range(1,i):
         u[row,col]=y*u[row+1,col+1] + (1-2*y)*u[row+1,col] + y*u[row+1,col-1]
 print(u)
+
+
 import numpy as np
 import math as m
 a=float(input("enter the value of a="))
@@ -331,77 +367,9 @@ for row in range(j-2,-1,-1):
         else:
            u[row,col]=(y**2)*u[row+1,col-1]+2*(1-y**2)*u[row+1,col]+(y**2)*u[row+1,col+1]-u[row+2,col]
 print(u)
-import numpy as np
-import math as m
-a=float(input("enter the value of a="))
-k=float(input("enter the value of k="))
-h=float(input("enter the value of h="))
-x_b=float(input("enter the boundary value of x="))
-t_b=float(input("enter the boundary value of t="))
-def g(x):
-    return x
-y=k/h
-i=int(x_b/h)
-j=int(t_b/k)
-u=np.zeros(shape=(j+1,i+2))
-#........................................................................<<<BOUNDARY CONDITIONS>>>......................................................................
-for alpha in range(0,i+1):
-    u[0,alpha]=g(alpha*h)
-for alpha in range(0,j+1):
-    u[alpha,i+1]=((i+1)*h)-(alpha*0.125)
-#............................................................................<<< INITIAL CONDITIONS >>>............................................................................
-for beta in range(0,j+1):
-    u[beta,0]=g(beta*k)
-for row in range(1,j+1,):
-    for col in range(1,i+1):
-        u[row,col]=u[row-1,col] - (a*y/2)*(u[row-1,col+1] - u[row-1,col-1])
-print(u)
-import numpy as np
-import math as m
-a=float(input("enter the value of a="))
-k=float(input("enter the value of k="))
-h=float(input("enter the value of h="))
-x_b=float(input("enter the boundary value of x="))
-t_b=float(input("enter the boundary value of t="))
-def g(x):
-    return x
-y=k/h
-i=int(x_b/h)
-j=int(t_b/k)
-u=np.zeros(shape=(j+1,i+1))
-#........................................................................<<<BOUNDARY CONDITIONS>>>......................................................................
-for alpha in range(0,i+1):
-    u[0,alpha]=g(alpha*h)
-#............................................................................<<< INITIAL CONDITIONS >>>............................................................................
-for beta in range(0,j+1):
-    u[beta,0]=g(beta*k)
-for row in range(1,j+1,):
-    for col in range(1,i+1):
-        u[row,col]=((1-a*y)/(1+a*y))*u[row-1,col] - ((1-a*y)/(1+a*y))*u[row,col-1] +u[row-1,col-1]
-print(u)'''
-import numpy as np
-import math as m
-a=float(input("enter the value of a="))
-k=float(input("enter the value of k="))
-h=float(input("enter the value of h="))
-x_b=float(input("enter the boundary value of x="))
-t_b=float(input("enter the boundary value of t="))
-def g(x):
-    return x
-y=k/h
-i=int(x_b/h)
-j=int(t_b/k)
-u=np.zeros(shape=(j+1,i+1))
-#........................................................................<<<BOUNDARY CONDITIONS>>>......................................................................
-for alpha in range(0,i+1):
-    u[0,alpha]=g(alpha*h)
-#............................................................................<<< INITIAL CONDITIONS >>>............................................................................
-for beta in range(0,j+1):
-    u[beta,0]=g(beta*k)
-for row in range(1,j+1,):
-    for col in range(1,i+1):
-        u[row,col]=((1-a*y)/(1+a*y))*u[row-1,col] - ((1-a*y)/(1+a*y))*u[row,col-1] +u[row-1,col-1]
-print(u)
+
+
+
 
 
 
